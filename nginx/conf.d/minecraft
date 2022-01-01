@@ -1,0 +1,12 @@
+stream {
+      server {
+          listen 25565;
+          proxy_pass lighthouse_cluster;
+      }
+
+      upstream minecraft_cluster{
+          server 1.13.184.119:25565;
+          server 118.195.189.253:25565;
+          server 129.211.209.19:25565;
+      }
+}
