@@ -1,5 +1,4 @@
-FROM nginx:alpine
-# nginx:alpine has already compiled nginx with stream module.
+FROM alpine:latest
 
 LABEL maintainer="WeiRuofeng <weiruofeng@ruofengx.cn>"
 
@@ -11,4 +10,6 @@ RUN set -ex \
 	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
 	&& apk add -U \
 	## add timezone support
-	&& apk add tzdata
+	&& apk add tzdata \
+	&& apk add nginx
+	
