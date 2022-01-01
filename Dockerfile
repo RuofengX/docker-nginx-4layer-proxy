@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer="WeiRuofeng <weiruofeng@ruofengx.cn>"
 
-COPY nginx/conf.d/ /etc/nginx/conf.d
+COPY nginx/conf.d/ /etc/nginx/http.d
 
 ENV TZ=Asia/Shanghai
 RUN set -ex \
@@ -11,5 +11,5 @@ RUN set -ex \
 	&& apk add -U \
 	## add timezone support
 	&& apk add tzdata \
-	&& apk add nginx
+	&& apk add nginx nginx-mod-stream
 	
