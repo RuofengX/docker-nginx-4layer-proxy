@@ -15,7 +15,7 @@ WORKDIR /opt
 RUN wget https://nginx.org/download/nginx-1.21.5.tar.gz \
     && tar -zxvf nginx-1.*.tar.gz \
     && cd nginx-1.* \
-    && ./configure --prefix=/opt/nginx --user=nginx --group=nginx --with-http_ssl_module --with-threads --with-stream \
+    && ./configure --prefix=/opt/nginx --user=nginx --group=nginx --with-threads --with-stream \
     && make && make install \
     && cd .. && rm -rf nginx-1.*
 
