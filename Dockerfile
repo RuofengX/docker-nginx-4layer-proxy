@@ -2,7 +2,6 @@ FROM alpine:latest
 
 LABEL maintainer="WeiRuofeng <weiruofeng@ruofengx.cn>"
 
-COPY nginx/conf.d/ /etc/nginx/http.d
 
 ENV TZ=Asia/Shanghai
 RUN set -ex \
@@ -13,3 +12,8 @@ RUN set -ex \
 	&& apk add tzdata \
 	&& apk add nginx nginx-mod-stream
 	
+COPY nginx/stream.d/ /etc/nginx/stream.d
+RUN echo "" > /etc/nginx/http.d/default.conf \
+    && echo "include /etc/nginx/stream.conf;" >> /etc/nginx/nginx.conf
+
+CMD ["nginx"]
