@@ -6,6 +6,7 @@ ENV TZ=Asia/Shanghai
 RUN set -ex \
 	## install dependence
 	&& sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && sed -i s@/security.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
     && apt update && apt upgrade -y \
 	&& apt install -y wget libpcre3-dev build-essential libssl-dev zlib1g-dev \
     && apt clean \
