@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:latest AS nginx-stream
 LABEL maintainer="WeiRuofeng <weiruofeng@ruofengx.cn>"
 
 
@@ -19,6 +19,12 @@ RUN wget https://nginx.org/download/nginx-1.21.5.tar.gz \
     && ./configure --prefix=/opt/nginx --user=nginx --group=nginx --with-threads --with-stream \
     && make && make install \
     && cd .. && rm -rf nginx-1.*
+
+####################################################
+
+FROM ubuntu:latest AS prod
+
+COPY --from=nginx-stream /opt/nginx /opt/nginx
 
 # nginx user
 RUN adduser --system --no-create-home --disabled-login --disabled-password --group nginx
