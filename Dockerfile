@@ -1,8 +1,6 @@
 FROM ubuntu:latest AS nginx-stream
 LABEL maintainer="WeiRuofeng <weiruofeng@ruofengx.cn>"
 
-
-ENV TZ=Asia/Shanghai
 RUN set -ex \
 	## install dependence
 	&& sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
@@ -23,6 +21,11 @@ RUN wget https://nginx.org/download/nginx-1.21.5.tar.gz \
 ####################################################
 
 FROM ubuntu:latest AS prod
+
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && sed -i s@/security.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && apt-get update && apt-get install -y --no-install-recommends tzdata  && rm -rf /var/lib/apt/lists/*
+ENV TZ Asia/Shanghai
 
 COPY --from=nginx-stream /opt/nginx /opt/nginx
 
