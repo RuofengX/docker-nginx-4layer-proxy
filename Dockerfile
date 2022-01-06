@@ -34,8 +34,4 @@ RUN adduser --system --no-create-home --disabled-login --disabled-password --gro
 
 ADD nginx.conf /opt/nginx/conf/nginx.conf
 
-WORKDIR /
-
-EXPOSE 25565
-
 CMD ["/opt/nginx/sbin/nginx"]
